@@ -488,6 +488,30 @@
   }
   .carousel-dot:hover { border-color: #fff; }
 
+  /* Sound toggle */
+  .carousel-sound {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    z-index: 2;
+  }
+  .carousel-sound:hover {
+    background: rgba(0,0,0,0.7);
+    transform: scale(1.08);
+  }
+
   @media (max-width: 768px) {
     .carousel-arrow { width: 36px; height: 36px; }
     .carousel-prev { left: 8px; }
@@ -569,6 +593,12 @@
         </button>
         <button class="carousel-arrow carousel-next" onclick="carouselNav(1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- Звук -->
+        <button class="carousel-sound" id="soundToggle" onclick="toggleSound()">
+          <svg class="sound-off" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/><line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="sound-on" style="display:none" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.54 8.46a5 5 0 010 7.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19.07 4.93a10 10 0 010 14.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
 
         <!-- Точки -->
@@ -771,9 +801,9 @@
 // ══════════════════════════════════
 // CONFIG — Set your backend URL here
 // ══════════════════════════════════
-// After deploying your Vercel backend, set this:
-// window.SKAZKI_API_BASE = 'https://your-project.vercel.app';
-// Leave empty for demo mode (simulated responses)
+// API base URL. Leave empty when frontend and backend are on the same domain.
+// Set to full URL (e.g. 'https://your-project.vercel.app') if backend is on a different domain.
+// Set to 'demo' for offline demo mode (simulated responses).
 window.SKAZKI_API_BASE = '';
 
 // ══════════════════════════════════
@@ -803,9 +833,8 @@ function submitEmail(inputId, successId, formId, noteId) {
   if (form) form.style.display = 'none';
   document.getElementById(successId).classList.add('show');
 
-  // ═══ CHANGE THIS URL to your Vercel backend ═══
   const API_BASE = window.SKAZKI_API_BASE || '';
-  if (API_BASE) {
+  if (API_BASE !== 'demo') {
     fetch(API_BASE + '/api/collect-email', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -832,6 +861,16 @@ document.querySelectorAll('.demo-tab').forEach(tab => {
 // ══════════════════════════════════
 let currentSlide = 0;
 const totalSlides = 3;
+let soundOn = false;
+
+function toggleSound() {
+  soundOn = !soundOn;
+  const btn = document.getElementById('soundToggle');
+  btn.querySelector('.sound-off').style.display = soundOn ? 'none' : 'block';
+  btn.querySelector('.sound-on').style.display = soundOn ? 'block' : 'none';
+  const video = document.querySelectorAll('.carousel-slide')[currentSlide].querySelector('video');
+  if (video) video.muted = !soundOn;
+}
 
 function carouselNav(dir) {
   carouselGo((currentSlide + dir + totalSlides) % totalSlides);
@@ -853,6 +892,7 @@ function carouselGo(index) {
 
   const newVideo = slides[currentSlide].querySelector('video');
   if (newVideo) {
+    newVideo.muted = !soundOn;
     newVideo.currentTime = 0;
     newVideo.play().catch(() => {});
   }
@@ -988,7 +1028,7 @@ async function selectStory(el, storyId) {
 
   const API_BASE = window.SKAZKI_API_BASE || '';
 
-  if (API_BASE && window._recordedBlob) {
+  if (API_BASE !== 'demo' && window._recordedBlob) {
     // ── REAL API CALL ──
     try {
       const formData = new FormData();
