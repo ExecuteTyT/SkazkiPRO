@@ -853,6 +853,15 @@ document.querySelectorAll('.demo-tab').forEach(tab => {
     document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+
+    // Mute and pause all carousel videos when leaving video tab
+    if (tab.dataset.tab !== 'video') {
+      document.querySelectorAll('.carousel-slide video').forEach(v => {
+        v.muted = true;
+        v.pause();
+      });
+      if (typeof updateSoundIcon === 'function') updateSoundIcon();
+    }
   });
 });
 
