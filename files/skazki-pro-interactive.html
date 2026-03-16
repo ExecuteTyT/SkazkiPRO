@@ -861,15 +861,19 @@ document.querySelectorAll('.demo-tab').forEach(tab => {
 // ══════════════════════════════════
 let currentSlide = 0;
 const totalSlides = 3;
-let soundOn = false;
+
+function updateSoundIcon() {
+  const video = document.querySelectorAll('.carousel-slide')[currentSlide].querySelector('video');
+  const muted = !video || video.muted;
+  const btn = document.getElementById('soundToggle');
+  btn.querySelector('.sound-off').style.display = muted ? 'block' : 'none';
+  btn.querySelector('.sound-on').style.display = muted ? 'none' : 'block';
+}
 
 function toggleSound() {
-  soundOn = !soundOn;
-  const btn = document.getElementById('soundToggle');
-  btn.querySelector('.sound-off').style.display = soundOn ? 'none' : 'block';
-  btn.querySelector('.sound-on').style.display = soundOn ? 'block' : 'none';
   const video = document.querySelectorAll('.carousel-slide')[currentSlide].querySelector('video');
-  if (video) video.muted = !soundOn;
+  if (video) video.muted = !video.muted;
+  updateSoundIcon();
 }
 
 function carouselNav(dir) {
@@ -892,10 +896,10 @@ function carouselGo(index) {
 
   const newVideo = slides[currentSlide].querySelector('video');
   if (newVideo) {
-    newVideo.muted = !soundOn;
     newVideo.currentTime = 0;
     newVideo.play().catch(() => {});
   }
+  updateSoundIcon();
 }
 
 // Auto-play first video when tab becomes active
