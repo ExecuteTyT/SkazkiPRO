@@ -18,7 +18,7 @@
  *   ELEVENLABS_API_KEY — your ElevenLabs API key (Creator plan or above)
  */
 
-const formidable = require('formidable');
+const { formidable } = require('formidable');
 const { readFileSync } = require('fs');
 
 // ── Fairy tale texts (short versions for demo) ──
