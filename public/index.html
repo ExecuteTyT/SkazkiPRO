@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>СказкиПро — Ваш ребёнок станет героем сказки</title>
+<meta name="description" content="AI-сказки, где главный герой — ваш ребёнок. Загрузите фото — получите волшебную историю с озвучкой голосом мамы или папы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender: #A78BFA;
+    --lavender-deep: #7C3AED;
+    --violet: #6D28D9;
+    --honey: #FFB347;
+    --honey-deep: #F59E0B;
+    --amber: #D97706;
+    --mint: #6EE7B7;
+    --mint-deep: #10B981;
+    --emerald: #059669;
+    --rose: #FDA4AF;
+    --rose-deep: #F43F5E;
+    --sky: #7DD3FC;
+    --sky-deep: #0EA5E9;
+    --cream: #FFFBF0;
+    --text-dark: #1E1B3A;
+    --text-body: #4A4560;
+    --text-light: #7B7594;
+    --card-bg: rgba(255,255,255,0.88);
+    --shadow-soft: 0 4px 24px rgba(30,27,58,0.07);
+    --shadow-lift: 0 12px 40px rgba(30,27,58,0.12);
+    --radius: 24px;
+    --radius-sm: 16px;
+    --radius-xs: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+    background: var(--cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ BG BLOBS ═══ */
+  .bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.3; animation: bfloat 22s ease-in-out infinite; }
+  .b1 { width: 520px; height: 520px; background: var(--lavender); top: -8%; left: -6%; }
+  .b2 { width: 420px; height: 420px; background: var(--honey); top: 25%; right: -10%; animation-delay: -8s; }
+  .b3 { width: 380px; height: 380px; background: var(--mint); bottom: 5%; left: 8%; animation-delay: -15s; }
+  .b4 { width: 300px; height: 300px; background: var(--rose); top: 55%; left: 45%; animation-delay: -4s; }
+  @keyframes bfloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(25px,-35px) scale(1.04); }
+    66% { transform: translate(-20px,25px) scale(0.96); }
+  }
+
+  /* ═══ CONTAINER ═══ */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ═══ NAV ═══ */
+  .nav { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    font-family: 'Comfortaa', cursive; font-size: 1.55rem; font-weight: 700;
+    color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 10px;
+  }
+  .logo-icon {
+    width: 42px; height: 42px; background: linear-gradient(135deg, var(--lavender-deep), var(--rose));
+    border-radius: 13px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; box-shadow: 0 4px 14px rgba(124,58,237,0.3);
+  }
+  .nav-cta {
+    background: var(--lavender-deep); color: #fff; border: none; padding: 12px 28px;
+    border-radius: 100px; font-family: 'Nunito'; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s; text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--violet); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+
+  /* ═══ HERO ═══ */
+  .hero { padding: 72px 0 48px; text-align: center; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(167,139,250,0.13); color: var(--lavender-deep);
+    padding: 8px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
+    margin-bottom: 26px; animation: fadeUp 0.7s ease-out;
+  }
+  .pulse-dot { width: 8px; height: 8px; background: var(--lavender-deep); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.6)} }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 5.5vw, 3.7rem); font-weight: 900; line-height: 1.14;
+    margin-bottom: 22px; animation: fadeUp 0.7s ease-out 0.1s both;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--lavender-deep), var(--rose-deep));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    font-size: clamp(1.05rem,2vw,1.22rem); color: var(--text-body);
+    max-width: 620px; margin: 0 auto 40px; line-height: 1.65;
+    animation: fadeUp 0.7s ease-out 0.2s both;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ═══ EMAIL FORM ═══ */
+  .email-form { display: flex; gap: 12px; max-width: 500px; margin: 0 auto 14px; }
+  .email-form input {
+    flex: 1; padding: 15px 22px; border: 2px solid rgba(167,139,250,0.18);
+    border-radius: 100px; font-family: 'Nunito'; font-size: 1rem;
+    color: var(--text-dark); background: #fff; outline: none; transition: border-color 0.3s;
+  }
+  .email-form input::placeholder { color: var(--text-light); }
+  .email-form input:focus { border-color: var(--lavender-deep); }
+  .email-form button {
+    background: linear-gradient(135deg, var(--lavender-deep), var(--rose-deep));
+    color: #fff; border: none; padding: 15px 30px; border-radius: 100px;
+    font-family: 'Nunito'; font-size: 1rem; font-weight: 800;
+    cursor: pointer; transition: all 0.3s; white-space: nowrap;
+  }
+  .email-form button:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.3); }
+  .form-note { text-align: center; font-size: 0.82rem; color: var(--text-light); }
+  .success-msg {
+    display: none; text-align: center; padding: 18px 24px;
+    background: rgba(110,231,183,0.14); border-radius: var(--radius-xs);
+    color: var(--mint-deep); font-weight: 700; font-size: 1.02rem;
+    max-width: 500px; margin: 0 auto;
+  }
+  .success-msg.show { display: block; animation: fadeUp 0.5s ease-out; }
+
+  /* ═══ SECTION COMMON ═══ */
+  .section-title { text-align: center; font-size: clamp(1.7rem,4vw,2.5rem); font-weight: 900; margin-bottom: 10px; }
+  .section-sub { text-align: center; color: var(--text-body); font-size: 1.08rem; max-width: 560px; margin: 0 auto 48px; line-height: 1.6; }
+
+  /* ═══ DEMO TABS ═══ */
+  .demo-section { padding: 70px 0; }
+  .demo-tabs {
+    display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap;
+  }
+  .demo-tab {
+    padding: 14px 28px; border-radius: 100px; border: 2px solid rgba(167,139,250,0.2);
+    background: #fff; font-family: 'Nunito'; font-size: 0.95rem; font-weight: 700;
+    color: var(--text-body); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+  }
+  .demo-tab:hover { border-color: var(--lavender); background: rgba(167,139,250,0.06); }
+  .demo-tab.active {
+    background: var(--lavender-deep); color: #fff; border-color: var(--lavender-deep);
+    box-shadow: 0 6px 22px rgba(124,58,237,0.25);
+  }
+  .demo-tab .tab-emoji { font-size: 1.15rem; }
+
+  .demo-panel { display: none; animation: fadeUp 0.5s ease-out; }
+  .demo-panel.active { display: block; }
+
+  /* ═══ DEMO 1: VIDEO ═══ */
+  .video-demo {
+    max-width: 700px; margin: 0 auto; background: var(--card-bg); backdrop-filter: blur(12px);
+    border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lift);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+  .video-placeholder {
+    width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #E0E7FF, #DDD6FE);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; position: relative; overflow: hidden; cursor: pointer;
+  }
+  .video-placeholder::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(167,139,250,0.2), transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(253,164,175,0.15), transparent 50%);
+  }
+  .play-btn {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(30,27,58,0.15); z-index: 1; transition: transform 0.3s;
+  }
+  .play-btn:hover { transform: scale(1.08); }
+  .play-btn svg { margin-left: 4px; }
+  .video-label { font-weight: 800; color: var(--lavender-deep); z-index: 1; font-size: 1rem; }
+  .video-caption {
+    padding: 24px 28px; text-align: center;
+  }
+  .video-caption h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
+  .video-caption p { font-size: 0.92rem; color: var(--text-body); line-height: 1.55; }
+
+  /* ═══ DEMO 2: VOICE ═══ */
+  .voice-demo {
+    max-width: 600px; margin: 0 auto; background: var(--card-bg); backdrop-filter: blur(12px);
+    border-radius: var(--radius); padding: 40px 36px; box-shadow: var(--shadow-lift);
+    border: 1px solid rgba(255,255,255,0.5); text-align: center;
+  }
+  .voice-demo h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
+  .voice-demo .voice-sub { color: var(--text-body); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+
+  .voice-steps { display: flex; gap: 16px; margin-bottom: 28px; justify-content: center; flex-wrap: wrap; }
+  .voice-step {
+    display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; color: var(--text-light);
+  }
+  .voice-step.done { color: var(--mint-deep); }
+  .voice-step.current { color: var(--lavender-deep); }
+  .voice-step-num {
+    width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 800; border: 2px solid currentColor;
+  }
+  .voice-step.done .voice-step-num { background: var(--mint-deep); color: #fff; border-color: var(--mint-deep); }
+  .voice-step.current .voice-step-num { background: var(--lavender-deep); color: #fff; border-color: var(--lavender-deep); }
+
+  /* recorder */
+  .recorder-area { margin-bottom: 28px; }
+  .recorder-prompt {
+    background: rgba(167,139,250,0.08); border-radius: var(--radius-sm); padding: 20px 24px;
+    margin-bottom: 20px; text-align: left;
+  }
+  .recorder-prompt .label { font-size: 0.78rem; font-weight: 800; color: var(--lavender-deep); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .recorder-prompt .text { font-size: 1.05rem; color: var(--text-dark); line-height: 1.55; font-weight: 600; }
+
+  .rec-btn {
+    width: 72px; height: 72px; border-radius: 50%; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto;
+    transition: all 0.3s; position: relative;
+  }
+  .rec-btn.idle { background: var(--rose-deep); box-shadow: 0 6px 24px rgba(244,63,94,0.3); }
+  .rec-btn.idle:hover { transform: scale(1.06); box-shadow: 0 8px 30px rgba(244,63,94,0.4); }
+  .rec-btn.recording {
+    background: var(--rose-deep); animation: recPulse 1.5s infinite;
+  }
+  @keyframes recPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(244,63,94,0.4); }
+    50% { box-shadow: 0 0 0 20px rgba(244,63,94,0); }
+  }
+  .rec-btn svg { color: #fff; }
+  .rec-timer { margin-top: 12px; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); font-variant-numeric: tabular-nums; }
+  .rec-hint { font-size: 0.82rem; color: var(--text-light); margin-top: 6px; }
+
+  /* story selector */
+  .story-selector { display: none; }
+  .story-selector.show { display: block; animation: fadeUp 0.5s ease-out; }
+  .story-selector h4 { font-size: 1rem; font-weight: 800; margin-bottom: 16px; }
+  .story-options { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .story-opt {
+    padding: 14px 24px; border-radius: var(--radius-sm); border: 2px solid rgba(255,179,71,0.25);
+    background: rgba(255,179,71,0.06); cursor: pointer; transition: all 0.3s;
+    font-family: 'Nunito'; font-weight: 700; font-size: 0.92rem; color: var(--text-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .story-opt:hover { border-color: var(--honey-deep); background: rgba(255,179,71,0.12); transform: translateY(-2px); }
+  .story-opt.selected { border-color: var(--honey-deep); background: var(--honey); color: #fff; }
+
+  /* audio result */
+  .voice-result { display: none; margin-top: 24px; }
+  .voice-result.show { display: block; animation: fadeUp 0.5s ease-out; }
+  .voice-result-card {
+    background: linear-gradient(135deg, rgba(255,179,71,0.1), rgba(253,164,175,0.1));
+    border-radius: var(--radius-sm); padding: 24px; text-align: center;
+  }
+  .voice-result-card .generating {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    font-weight: 700; color: var(--honey-deep); font-size: 0.95rem;
+  }
+  .spinner {
+    width: 22px; height: 22px; border: 3px solid rgba(245,158,11,0.2);
+    border-top-color: var(--honey-deep); border-radius: 50%; animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .audio-player-wrap { margin-top: 16px; }
+  .audio-player-wrap audio { width: 100%; border-radius: 100px; }
+  .voice-result-note { font-size: 0.82rem; color: var(--text-light); margin-top: 12px; }
+
+  /* email gate */
+  .email-gate { display: none; margin-top: 24px; }
+  .email-gate.show { display: block; animation: fadeUp 0.5s ease-out; }
+  .email-gate p { font-size: 0.95rem; color: var(--text-body); margin-bottom: 14px; font-weight: 600; }
+
+  /* ═══ DEMO 3: VALUES ═══ */
+  .values-demo { max-width: 800px; margin: 0 auto; }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .value-card {
+    background: var(--card-bg); backdrop-filter: blur(12px); border-radius: var(--radius);
+    padding: 28px 20px; text-align: center; box-shadow: var(--shadow-soft);
+    border: 2px solid transparent; cursor: pointer; transition: all 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .value-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .value-card:nth-child(1)::before { background: linear-gradient(90deg, #FDA4AF, var(--rose-deep)); }
+  .value-card:nth-child(2)::before { background: linear-gradient(90deg, var(--sky), var(--sky-deep)); }
+  .value-card:nth-child(3)::before { background: linear-gradient(90deg, var(--mint), var(--mint-deep)); }
+  .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .value-card.active { border-color: var(--lavender-deep); }
+  .value-card .v-emoji { font-size: 2.4rem; margin-bottom: 12px; display: block; }
+  .value-card .v-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
+  .value-card .v-desc { font-size: 0.85rem; color: var(--text-body); line-height: 1.5; }
+
+  /* story display */
+  .story-display { display: none; }
+  .story-display.show { display: block; animation: fadeUp 0.5s ease-out; }
+  .story-book {
+    background: #fff; border-radius: var(--radius); box-shadow: var(--shadow-lift);
+    overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 400px;
+  }
+  .story-illust {
+    display: flex; align-items: center; justify-content: center; padding: 32px;
+    position: relative; overflow: hidden;
+  }
+  .story-illust .scene {
+    font-size: 5rem; z-index: 1; position: relative;
+    animation: floatSlow 4s ease-in-out infinite;
+  }
+  @keyframes floatSlow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .story-illust .scene-bg {
+    position: absolute; inset: 0; opacity: 0.4;
+  }
+  .story-text-area {
+    padding: 36px 32px; display: flex; flex-direction: column; justify-content: center;
+  }
+  .story-text-area .st-badge {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; padding: 5px 14px;
+    border-radius: 100px; width: fit-content;
+  }
+  .story-text-area .st-title {
+    font-size: 1.35rem; font-weight: 900; margin-bottom: 14px; line-height: 1.3;
+  }
+  .story-text-area .st-text {
+    font-size: 0.95rem; color: var(--text-body); line-height: 1.7; margin-bottom: 20px;
+  }
+  .story-text-area .st-moral {
+    background: rgba(167,139,250,0.08); border-radius: var(--radius-xs); padding: 14px 18px;
+    font-size: 0.88rem; font-weight: 700; color: var(--lavender-deep); line-height: 1.5;
+  }
+
+  /* ═══ FEATURES ═══ */
+  .features { padding: 70px 0; }
+  .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .feature-card {
+    background: var(--card-bg); backdrop-filter: blur(12px); border-radius: var(--radius);
+    padding: 36px 28px; text-align: center; box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255,255,255,0.5); transition: all 0.4s; position: relative; overflow: hidden;
+  }
+  .feature-card::before { content:''; position: absolute; top:0; left:0; right:0; height: 4px; }
+  .feature-card:nth-child(1)::before { background: linear-gradient(90deg, var(--lavender), var(--lavender-deep)); }
+  .feature-card:nth-child(2)::before { background: linear-gradient(90deg, var(--honey), var(--honey-deep)); }
+  .feature-card:nth-child(3)::before { background: linear-gradient(90deg, var(--mint), var(--mint-deep)); }
+  .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+  .feature-icon {
+    width: 68px; height: 68px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.9rem; margin: 0 auto 20px;
+  }
+  .feature-card:nth-child(1) .feature-icon { background: rgba(167,139,250,0.13); }
+  .feature-card:nth-child(2) .feature-icon { background: rgba(255,179,71,0.13); }
+  .feature-card:nth-child(3) .feature-icon { background: rgba(110,231,183,0.13); }
+  .feature-card h3 { font-size: 1.18rem; font-weight: 800; margin-bottom: 10px; }
+  .feature-card p { color: var(--text-body); font-size: 0.93rem; line-height: 1.6; }
+
+  /* ═══ SOCIAL PROOF ═══ */
+  .social-proof { padding: 60px 0; }
+  .testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .testimonial {
+    background: var(--card-bg); backdrop-filter: blur(12px); border-radius: var(--radius);
+    padding: 30px 26px; box-shadow: var(--shadow-soft); border: 1px solid rgba(255,255,255,0.5);
+  }
+  .testimonial .stars { color: var(--honey-deep); font-size: 1rem; margin-bottom: 10px; letter-spacing: 2px; }
+  .testimonial .quote { font-size: 0.93rem; color: var(--text-body); line-height: 1.6; margin-bottom: 14px; font-style: italic; }
+  .testimonial .author { font-weight: 800; font-size: 0.83rem; }
+  .testimonial .author span { font-weight: 400; color: var(--text-light); }
+
+  /* ═══ FINAL CTA ═══ */
+  .final-cta { padding: 70px 0 90px; text-align: center; }
+  .cta-box {
+    background: linear-gradient(135deg, var(--lavender-deep), var(--rose-deep));
+    border-radius: 32px; padding: 60px 36px; color: #fff; position: relative; overflow: hidden;
+  }
+  .cta-box::before { content:''; position: absolute; top:-50%; right:-18%; width: 400px; height: 400px; background: rgba(255,255,255,0.07); border-radius: 50%; }
+  .cta-box::after { content:''; position: absolute; bottom:-35%; left:-8%; width: 320px; height: 320px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+  .cta-box h2 { font-size: clamp(1.7rem,4vw,2.3rem); font-weight: 900; margin-bottom: 14px; position: relative; z-index:1; }
+  .cta-box > p { font-size: 1.05rem; opacity: 0.9; max-width: 500px; margin: 0 auto 28px; line-height: 1.6; position: relative; z-index:1; }
+  .cta-box .email-form { position: relative; z-index:1; }
+  .cta-box .email-form input { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.12); color: #fff; }
+  .cta-box .email-form input::placeholder { color: rgba(255,255,255,0.55); }
+  .cta-box .email-form input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.18); }
+  .cta-box .email-form button { background: #fff; color: var(--lavender-deep); }
+  .cta-box .email-form button:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+  .cta-box .form-note { color: rgba(255,255,255,0.65); }
+
+  /* ═══ FOOTER ═══ */
+  footer { padding: 28px 0; text-align: center; font-size: 0.82rem; color: var(--text-light); border-top: 1px solid rgba(0,0,0,0.04); }
+
+  /* ═══ SCROLL REVEAL ═══ */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease-out, transform 0.65s ease-out; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .features-grid, .testimonials, .values-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .email-form { flex-direction: column; }
+    .email-form button { width: 100%; }
+    .hero { padding: 44px 0 32px; }
+    .story-book { grid-template-columns: 1fr; }
+    .story-illust { min-height: 200px; }
+    .demo-tab { padding: 10px 18px; font-size: 0.85rem; }
+    .nav-cta { padding: 10px 18px; font-size: 0.85rem; }
+    .voice-demo { padding: 28px 20px; }
+  }
+
+  /* ═══ VIDEO CAROUSEL ═══ */
+  .video-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: #0a0a1a;
+  }
+  .carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .carousel-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Arrows */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    z-index: 2;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .carousel-arrow:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .carousel-prev { left: 12px; }
+  .carousel-next { right: 12px; }
+
+  /* Dots */
+  .carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.7);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+  }
+  .carousel-dot.active {
+    background: #fff;
+    border-color: #fff;
+    transform: scale(1.2);
+  }
+  .carousel-dot:hover { border-color: #fff; }
+
+  @media (max-width: 768px) {
+    .carousel-arrow { width: 36px; height: 36px; }
+    .carousel-prev { left: 8px; }
+    .carousel-next { right: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<div class="container">
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="logo"><div class="logo-icon">📖</div>СказкиПро</a>
+  <a href="#demo" class="nav-cta">Попробовать</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="pulse-dot"></span> Уже 1 200+ родителей в очереди</div>
+  <h1>Ваш ребёнок —<br><span class="grad">герой сказки</span></h1>
+  <p class="hero-sub">
+    ИИ создаст волшебную историю, где&nbsp;главный персонаж&nbsp;— ваш малыш.
+    С&nbsp;озвучкой голосом мамы или папы и&nbsp;уроками доброты, смелости и&nbsp;дружбы.
+  </p>
+  <div class="email-form" id="heroForm">
+    <input type="email" placeholder="Ваш email" id="heroEmail">
+    <button type="button" onclick="submitEmail('heroEmail','heroSuccess','heroForm','heroNote')">Попробовать бесплатно</button>
+  </div>
+  <p class="form-note" id="heroNote">Бесплатно. Без карты. Запуск совсем скоро.</p>
+  <div class="success-msg" id="heroSuccess">✨ Вы в списке! Мы напишем вам первыми.</div>
+</section>
+
+<!-- ═══════════════════════════════ -->
+<!-- INTERACTIVE DEMO SECTION       -->
+<!-- ═══════════════════════════════ -->
+<section class="demo-section reveal" id="demo">
+  <h2 class="section-title">Попробуйте прямо сейчас</h2>
+  <p class="section-sub">Три волшебные суперсилы СказкиПро — протестируйте каждую</p>
+
+  <div class="demo-tabs">
+    <button class="demo-tab active" data-tab="video"><span class="tab-emoji">📸</span> Ребёнок-герой</button>
+    <button class="demo-tab" data-tab="voice"><span class="tab-emoji">🎙️</span> Голос мамы</button>
+    <button class="demo-tab" data-tab="values"><span class="tab-emoji">💛</span> Сказки про ценности</button>
+  </div>
+
+  <!-- TAB 1: VIDEO DEMO — CAROUSEL -->
+  <div class="demo-panel active" id="panel-video">
+    <div class="video-demo">
+      <div class="video-carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide active">
+            <video playsinline muted loop preload="metadata">
+              <source src="videos/video_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="carousel-slide">
+            <video playsinline muted loop preload="metadata">
+              <source src="videos/video_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="carousel-slide">
+            <video playsinline muted loop preload="metadata">
+              <source src="videos/video_3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <!-- Стрелки -->
+        <button class="carousel-arrow carousel-prev" onclick="carouselNav(-1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="carousel-arrow carousel-next" onclick="carouselNav(1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- Точки -->
+        <div class="carousel-dots">
+          <button class="carousel-dot active" onclick="carouselGo(0)"></button>
+          <button class="carousel-dot" onclick="carouselGo(1)"></button>
+          <button class="carousel-dot" onclick="carouselGo(2)"></button>
+        </div>
+      </div>
+
+      <div class="video-caption">
+        <h3>Так ваш ребёнок будет выглядеть в сказке</h3>
+        <p>Загрузите одно фото — ИИ создаст мультяшного персонажа и поместит его в волшебный мир. Листайте, чтобы увидеть примеры.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: VOICE DEMO -->
+  <div class="demo-panel" id="panel-voice">
+    <div class="voice-demo">
+      <h3>Озвучьте сказку своим голосом</h3>
+      <p class="voice-sub">Запишите короткий фрагмент — и&nbsp;ИИ создаст озвучку целой сказки вашим голосом</p>
+
+      <div class="voice-steps">
+        <div class="voice-step current" id="vs1">
+          <div class="voice-step-num">1</div> Запишите голос
+        </div>
+        <div class="voice-step" id="vs2">
+          <div class="voice-step-num">2</div> Выберите сказку
+        </div>
+        <div class="voice-step" id="vs3">
+          <div class="voice-step-num">3</div> Слушайте
+        </div>
+      </div>
+
+      <!-- Step 1: Record -->
+      <div class="recorder-area" id="recorderArea">
+        <div class="recorder-prompt">
+          <div class="label">Прочитайте вслух:</div>
+          <div class="text">«Жил-был на свете маленький зайчонок. Каждое утро он выбегал на солнечную полянку и здоровался со всеми лесными друзьями. Доброе утро, мир!»</div>
+        </div>
+        <button class="rec-btn idle" id="recBtn" onclick="toggleRecording()">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 1a4 4 0 00-4 4v7a4 4 0 008 0V5a4 4 0 00-4-4z" fill="white"/>
+            <path d="M19 10v2a7 7 0 01-14 0v-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="rec-timer" id="recTimer" style="display:none">0:00</div>
+        <div class="rec-hint" id="recHint">Нажмите для записи (15–30 сек)</div>
+      </div>
+
+      <!-- Step 2: Choose story -->
+      <div class="story-selector" id="storySelector">
+        <h4>Выберите сказку для озвучки:</h4>
+        <div class="story-options">
+          <div class="story-opt" onclick="selectStory(this, 'dragon')">
+            <span>🐉</span> Дракон и печенье
+          </div>
+          <div class="story-opt" onclick="selectStory(this, 'moon')">
+            <span>🌙</span> Путешествие на Луну
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Result -->
+      <div class="voice-result" id="voiceResult">
+        <div class="voice-result-card">
+          <div class="generating" id="genLabel">
+            <div class="spinner"></div> Генерируем озвучку вашим голосом...
+          </div>
+          <div class="audio-player-wrap" id="audioWrap" style="display:none">
+            <p style="font-weight:800; margin-bottom:12px; color:var(--text-dark);">✨ Готово! Вот как звучит сказка вашим голосом:</p>
+            <!-- 
+              TODO: Replace with actual audio from ElevenLabs API.
+              For now, this shows a placeholder player.
+            -->
+            <audio controls id="audioPlayer">
+              <source src="" type="audio/mpeg">
+            </audio>
+            <p class="voice-result-note">Это демо-версия. В полной версии — сказки любой длины с полной озвучкой.</p>
+          </div>
+        </div>
+        <div class="email-gate" id="voiceEmailGate">
+          <p>Оставьте email, чтобы получить полную сказку вашим голосом при запуске:</p>
+          <div class="email-form">
+            <input type="email" placeholder="Ваш email" id="voiceEmail">
+            <button type="button" onclick="submitEmail('voiceEmail','voiceSuccess','','')">Получить доступ</button>
+          </div>
+          <div class="success-msg" id="voiceSuccess">✨ Отлично! Пришлём полную озвучку при запуске.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: VALUES DEMO -->
+  <div class="demo-panel" id="panel-values">
+    <div class="values-demo">
+      <p style="text-align:center; color:var(--text-body); margin-bottom: 24px; font-size: 0.95rem;">Выберите ценность — и прочитайте мини-сказку, которая мягко учит ребёнка важному</p>
+      <div class="values-grid">
+        <div class="value-card" onclick="showStory('kindness')">
+          <span class="v-emoji">💗</span>
+          <div class="v-name">Доброта</div>
+          <div class="v-desc">Как маленькие добрые поступки меняют целый мир</div>
+        </div>
+        <div class="value-card" onclick="showStory('courage')">
+          <span class="v-emoji">🦁</span>
+          <div class="v-name">Смелость</div>
+          <div class="v-desc">О том, что быть смелым — не значит не бояться</div>
+        </div>
+        <div class="value-card" onclick="showStory('honesty')">
+          <span class="v-emoji">⭐</span>
+          <div class="v-name">Честность</div>
+          <div class="v-desc">Почему правда — самая сильная суперсила</div>
+        </div>
+      </div>
+
+      <div class="story-display" id="storyDisplay">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="email-gate" id="valuesEmailGate" style="display:none; margin-top: 28px; text-align:center;">
+        <p style="font-size:0.95rem; color:var(--text-body); margin-bottom:14px; font-weight:600;">
+          Хотите получать новые сказки каждый день? Оставьте email:
+        </p>
+        <div class="email-form" style="max-width:440px;">
+          <input type="email" placeholder="Ваш email" id="valuesEmail">
+          <button type="button" onclick="submitEmail('valuesEmail','valuesSuccess','','')">Хочу сказки!</button>
+        </div>
+        <div class="success-msg" id="valuesSuccess">✨ Вы в списке! Скоро пришлём первую сказку.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features reveal">
+  <h2 class="section-title">Почему родители выбирают СказкиПро</h2>
+  <p class="section-sub">Не просто развлечение — инструмент воспитания и развития</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <h3>Уникальный персонаж</h3>
+      <p>ИИ создаёт мультяшную копию ребёнка по одному фото. Малыш узнаёт себя — и проживает историю по-настоящему.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎧</div>
+      <h3>Родной голос</h3>
+      <p>Запишите 2 минуты — и все сказки зазвучат голосом мамы или папы. Даже когда вас нет рядом.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌱</div>
+      <h3>Воспитание через сказку</h3>
+      <p>Доброта, честность, дружба, смелость — выбирайте тему, и сказка мягко научит ребёнка важному.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof reveal">
+  <h2 class="section-title">Родители уже в восторге</h2>
+  <p class="section-sub">Отзывы из раннего тестирования</p>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="quote">«Сын увидел себя в сказке и закричал: "Мама, это же Я!" Теперь просит новую историю каждый вечер.»</p>
+      <div class="author">Анна, 34 <span>· мама Артёма (5 лет)</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="quote">«Я в командировке, а дочка слушает сказку моим голосом. Плакала от счастья, если честно.»</p>
+      <div class="author">Дмитрий, 38 <span>· папа Алисы (4 года)</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p class="quote">«Выбрала тему "делиться" — ребёнок сам стал делиться игрушками. Сказка лучше уговоров!»</p>
+      <div class="author">Елена, 31 <span>· мама Софии (6 лет)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta reveal">
+  <div class="cta-box">
+    <h2>Подарите ребёнку сказку,<br>где он — главный герой</h2>
+    <p>Оставьте email — мы пришлём доступ первыми. Первые 500 получат бесплатный месяц.</p>
+    <div class="email-form" id="ctaForm">
+      <input type="email" placeholder="Ваш email" id="ctaEmail">
+      <button type="button" onclick="submitEmail('ctaEmail','ctaSuccess','ctaForm','ctaNote')">Записаться бесплатно</button>
+    </div>
+    <p class="form-note" id="ctaNote">Без спама. Только приглашение на запуск.</p>
+    <div class="success-msg" id="ctaSuccess" style="color:#fff;background:rgba(255,255,255,0.14);">✨ Вы в списке! Мы напишем первыми.</div>
+  </div>
+</section>
+
+<footer>© 2026 СказкиПро · Создано с 💜 для родителей и детей</footer>
+</div>
+
+<script>
+// ══════════════════════════════════
+// CONFIG — Set your backend URL here
+// ══════════════════════════════════
+// API base URL. Leave empty when frontend and backend are on the same domain.
+// Set to full URL (e.g. 'https://your-project.vercel.app') if backend is on a different domain.
+// Set to 'demo' for offline demo mode (simulated responses).
+window.SKAZKI_API_BASE = '';
+
+// ══════════════════════════════════
+// SCROLL REVEAL
+// ══════════════════════════════════
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ══════════════════════════════════
+// EMAIL SUBMISSION
+// ══════════════════════════════════
+function submitEmail(inputId, successId, formId, noteId) {
+  const inp = document.getElementById(inputId);
+  const email = inp.value.trim();
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    inp.style.borderColor = '#F43F5E';
+    inp.focus();
+    setTimeout(() => inp.style.borderColor = '', 2000);
+    return;
+  }
+  // hide form, show success
+  if (formId) { document.getElementById(formId).style.display = 'none'; }
+  if (noteId) { document.getElementById(noteId).style.display = 'none'; }
+  const form = inp.closest('.email-form');
+  if (form) form.style.display = 'none';
+  document.getElementById(successId).classList.add('show');
+
+  const API_BASE = window.SKAZKI_API_BASE || '';
+  if (API_BASE !== 'demo') {
+    fetch(API_BASE + '/api/collect-email', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, source: 'skazki-pro', timestamp: new Date().toISOString() })
+    }).catch(err => console.error('Email API error:', err));
+  }
+  console.log('Email collected:', email);
+}
+
+// ══════════════════════════════════
+// DEMO TABS
+// ══════════════════════════════════
+document.querySelectorAll('.demo-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ══════════════════════════════════
+// VIDEO CAROUSEL
+// ══════════════════════════════════
+let currentSlide = 0;
+const totalSlides = 3;
+
+function carouselNav(dir) {
+  carouselGo((currentSlide + dir + totalSlides) % totalSlides);
+}
+
+function carouselGo(index) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const currentVideo = slides[currentSlide].querySelector('video');
+  if (currentVideo) currentVideo.pause();
+
+  currentSlide = index;
+
+  document.getElementById('carouselTrack').style.transform =
+    `translateX(-${currentSlide * 100}%)`;
+
+  document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentSlide);
+  });
+
+  const newVideo = slides[currentSlide].querySelector('video');
+  if (newVideo) {
+    newVideo.currentTime = 0;
+    newVideo.play().catch(() => {});
+  }
+}
+
+// Auto-play first video when tab becomes active
+document.querySelector('[data-tab="video"]').addEventListener('click', () => {
+  setTimeout(() => {
+    const firstVideo = document.querySelector('.carousel-slide.active video');
+    if (firstVideo) firstVideo.play().catch(() => {});
+  }, 100);
+});
+
+// Play first video on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const firstVideo = document.querySelector('.carousel-slide video');
+  if (firstVideo) firstVideo.play().catch(() => {});
+});
+
+// Swipe support for mobile
+(function() {
+  const track = document.getElementById('carouselTrack');
+  if (!track) return;
+  let startX = 0;
+  let isDragging = false;
+
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+
+  track.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      carouselNav(diff > 0 ? 1 : -1);
+    }
+  }, { passive: true });
+})();
+
+// ══════════════════════════════════
+// DEMO 2: VOICE RECORDING
+// ══════════════════════════════════
+let isRecording = false;
+let mediaRecorder = null;
+let audioChunks = [];
+let recInterval = null;
+let recSeconds = 0;
+
+function toggleRecording() {
+  if (!isRecording) {
+    startRecording();
+  } else {
+    stopRecording();
+  }
+}
+
+async function startRecording() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+    mediaRecorder.ondataavailable = e => { if(e.data.size > 0) audioChunks.push(e.data); };
+    mediaRecorder.onstop = onRecordingDone;
+    mediaRecorder.start();
+
+    isRecording = true;
+    recSeconds = 0;
+    const btn = document.getElementById('recBtn');
+    btn.className = 'rec-btn recording';
+    btn.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2" fill="white"/></svg>`;
+    const timer = document.getElementById('recTimer');
+    timer.style.display = 'block';
+    timer.textContent = '0:00';
+    document.getElementById('recHint').textContent = 'Читайте текст вслух... Нажмите для остановки';
+
+    recInterval = setInterval(() => {
+      recSeconds++;
+      const m = Math.floor(recSeconds / 60);
+      const s = recSeconds % 60;
+      timer.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+      // auto-stop at 30s
+      if (recSeconds >= 30) stopRecording();
+    }, 1000);
+
+  } catch(err) {
+    alert('Не удалось получить доступ к микрофону. Пожалуйста, разрешите доступ и попробуйте снова.');
+  }
+}
+
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stop();
+    mediaRecorder.stream.getTracks().forEach(t => t.stop());
+  }
+  clearInterval(recInterval);
+  isRecording = false;
+  const btn = document.getElementById('recBtn');
+  btn.className = 'rec-btn idle';
+  btn.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 1a4 4 0 00-4 4v7a4 4 0 008 0V5a4 4 0 00-4-4z" fill="white"/><path d="M19 10v2a7 7 0 01-14 0v-2" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`;
+  document.getElementById('recHint').textContent = 'Запись завершена!';
+}
+
+function onRecordingDone() {
+  // advance steps
+  document.getElementById('vs1').className = 'voice-step done';
+  document.getElementById('vs2').className = 'voice-step current';
+
+  // hide recorder, show story selector
+  document.getElementById('recorderArea').style.display = 'none';
+  const sel = document.getElementById('storySelector');
+  sel.classList.add('show');
+
+  // Store the recorded audio blob for later use
+  window._recordedBlob = new Blob(audioChunks, { type: 'audio/webm' });
+}
+
+async function selectStory(el, storyId) {
+  document.querySelectorAll('.story-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+
+  // advance steps
+  document.getElementById('vs2').className = 'voice-step done';
+  document.getElementById('vs3').className = 'voice-step current';
+
+  // show result
+  const res = document.getElementById('voiceResult');
+  res.classList.add('show');
+  document.getElementById('genLabel').style.display = 'flex';
+  document.getElementById('genLabel').innerHTML = '<div class="spinner"></div> Генерируем озвучку вашим голосом... (10-15 сек)';
+  document.getElementById('audioWrap').style.display = 'none';
+
+  const API_BASE = window.SKAZKI_API_BASE || '';
+
+  if (API_BASE !== 'demo' && window._recordedBlob) {
+    // ── REAL API CALL ──
+    try {
+      const formData = new FormData();
+      formData.append('audio', window._recordedBlob, 'recording.webm');
+      formData.append('story', storyId);
+
+      const response = await fetch(API_BASE + '/api/generate-voice', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error('API returned ' + response.status);
+      }
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      document.getElementById('audioPlayer').src = audioUrl;
+      document.getElementById('genLabel').style.display = 'none';
+      document.getElementById('audioWrap').style.display = 'block';
+
+      setTimeout(() => {
+        document.getElementById('voiceEmailGate').classList.add('show');
+      }, 1500);
+
+    } catch (err) {
+      console.error('Voice generation error:', err);
+      document.getElementById('genLabel').innerHTML = '❌ Не удалось сгенерировать. Попробуйте ещё раз.';
+    }
+  } else {
+    // ── DEMO MODE (no backend configured) ──
+    setTimeout(() => {
+      document.getElementById('genLabel').style.display = 'none';
+      document.getElementById('audioWrap').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('voiceEmailGate').classList.add('show');
+      }, 1500);
+    }, 3000);
+  }
+}
+
+// ══════════════════════════════════
+// DEMO 3: VALUES STORIES
+// ══════════════════════════════════
+const stories = {
+  kindness: {
+    emoji: '💗',
+    scene: '🧒🌸🐿️',
+    sceneBg: 'linear-gradient(135deg, #FDE2E4, #FAD2E1)',
+    badge: 'Доброта',
+    badgeColor: 'rgba(244,63,94,0.1)',
+    badgeText: '#F43F5E',
+    title: 'Как Маша согрела зимний лес',
+    text: 'Однажды зимой маленькая Маша нашла в лесу замёрзшего бельчонка. Она сняла свой шарфик и укутала его. Бельчонок согрелся, а потом привёл всех лесных друзей — они принесли Маше ягоды и орехи в благодарность. Оказалось, что один маленький добрый поступок может согреть целый лес.',
+    moral: '💡 Добрые поступки возвращаются к нам, иногда — в самый неожиданный момент.'
+  },
+  courage: {
+    emoji: '🦁',
+    scene: '🧒⚡🏔️',
+    sceneBg: 'linear-gradient(135deg, #DBEAFE, #BFDBFE)',
+    badge: 'Смелость',
+    badgeColor: 'rgba(14,165,233,0.1)',
+    badgeText: '#0EA5E9',
+    title: 'Гроза, которая боялась мальчика',
+    text: 'Артём очень боялся грозы. Но однажды ночью он услышал, как плачет котёнок за окном. Артём набрался храбрости, вышел под дождь и спас малыша. А когда вернулся домой, понял: гроза куда-то ушла. Или, может быть, это он просто перестал её бояться.',
+    moral: '💡 Смелость — это не когда тебе не страшно. Это когда страшно, но ты всё равно делаешь доброе дело.'
+  },
+  honesty: {
+    emoji: '⭐',
+    scene: '🧒🏺✨',
+    sceneBg: 'linear-gradient(135deg, #D1FAE5, #A7F3D0)',
+    badge: 'Честность',
+    badgeColor: 'rgba(16,185,129,0.1)',
+    badgeText: '#10B981',
+    title: 'Волшебная ваза и настоящее чудо',
+    text: 'София случайно разбила мамину любимую вазу. Она могла бы спрятать осколки, но решила рассказать правду. Мама обняла её и сказала: «Вазу можно склеить, а вот честность — это настоящее сокровище, которое нельзя разбить». С тех пор София знала: правда — самая сильная суперсила.',
+    moral: '💡 Честность иногда требует смелости, но она делает нас сильнее любого волшебства.'
+  }
+};
+
+function showStory(key) {
+  const s = stories[key];
+  document.querySelectorAll('.value-card').forEach((c,i) => {
+    c.classList.toggle('active', ['kindness','courage','honesty'][i] === key);
+  });
+
+  const display = document.getElementById('storyDisplay');
+  display.innerHTML = `
+    <div class="story-book">
+      <div class="story-illust">
+        <div class="scene-bg" style="background:${s.sceneBg};"></div>
+        <div class="scene">${s.scene}</div>
+      </div>
+      <div class="story-text-area">
+        <div class="st-badge" style="background:${s.badgeColor};color:${s.badgeText};">${s.emoji} ${s.badge}</div>
+        <div class="st-title">${s.title}</div>
+        <div class="st-text">${s.text}</div>
+        <div class="st-moral">${s.moral}</div>
+      </div>
+    </div>
+  `;
+  display.classList.add('show');
+  document.getElementById('valuesEmailGate').style.display = 'block';
+}
+
+// ══════════════════════════════════
+// NAV SMOOTH SCROLL
+// ══════════════════════════════════
+document.querySelector('.nav-cta').addEventListener('click', e => {
+  e.preventDefault();
+  document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+});
+</script>
+</body>
+</html>

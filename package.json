@@ -1,0 +1,11 @@
+{
+  "name": "skazki-pro",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "formidable": "^3.5.2"
+  }
+}
