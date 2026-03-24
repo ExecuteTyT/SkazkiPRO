@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-СказкиПро (SkazkiPro) — AI-powered fairy tale generation platform for children. Users record their voice, select a story, and receive an AI-narrated fairy tale in a cloned version of their voice using ElevenLabs.
+СказкиПро (SkazkiPro) — AI-powered personalized fairy tale platform for children. Freemium model: parents upload a child's photo + name, get a free 30-second demo (face-swap image + TTS narration), then can order the full 3-minute fairy tale.
 
 The project is in Russian. All user-facing text, stories, and documentation are in Russian.
 
@@ -12,47 +12,59 @@ The project is in Russian. All user-facing text, stories, and documentation are 
 
 Two-part system: static frontend + Vercel serverless backend.
 
-**Frontend** (root + `files/`):
-- `skazki-pro.html` — Landing page with email signup, scroll animations, waitlist counter
-- `files/skazki-pro-interactive.html` — Interactive demo with voice recording (MediaRecorder API), story selection, and audio playback
+**Frontend** (root):
+- `index.html` — Main landing page. Self-contained: all CSS and JS are inline. Freemium demo flow (photo upload → generation → result with paywall) + order form + FAQ.
+- `skazki-pro.html` — Legacy alternative landing (waitlist-focused, not actively used)
+- `files/skazki-pro-interactive.html` — Legacy interactive demo with voice recording
+- `css/style.css` / `js/main.js` — Legacy files, still referenced by `privacy.html`
 
-**Backend** (`files/skazki-pro-backend.tar/skazki-pro-backend/`):
-- `api/generate-voice.js` — Voice cloning + TTS via ElevenLabs API. Accepts multipart form (audio file + story ID), creates instant voice clone, generates speech, cleans up temporary voice, returns MP3
-- `api/collect-email.js` — Email collection endpoint. Logs to Vercel console by default; has commented-out integrations for Google Sheets and Telegram
+**Backend** (`api/`):
+- `api/generate-demo.js` — Demo generation. Accepts JSON `{ name, gender, photo }`. Runs ElevenLabs TTS + Akool face-swap in parallel. Returns `{ audio, image, paragraphs, name }`. Rate limited: 3 per IP per 30 min.
+- `api/generate-voice.js` — Voice cloning + TTS via ElevenLabs API (premium feature, separate from demo)
+- `api/collect-email.js` — Email collection endpoint (used for "coming soon" voice feature notifications)
+- `api/collect-phone.js` — Phone/contact collection (used for order form submissions)
 
 ## Development Commands
 
 ```bash
-# Backend local development (from skazki-pro-backend/)
 npm install
 vercel dev
 
-# Deploy backend
+# Deploy
 vercel
 vercel env add ELEVENLABS_API_KEY
+vercel env add ELEVENLABS_VOICE_ID
+vercel env add AKOOL_API_KEY
+vercel env add TEMPLATE_SCENE_URL
 ```
 
 No build step for frontend — vanilla HTML/CSS/JS served as static files.
 
 ## Key Configuration Points
 
-- **Backend URL**: Set `window.SKAZKI_API_BASE` in `skazki-pro-interactive.html` (line ~662). When empty, the demo runs in offline mode with simulated 3-second delays.
-- **Stories**: Hardcoded in `api/generate-voice.js` as the `STORIES` object (keys: `dragon`, `moon`). Add new stories there and update the frontend story selector.
-- **Voice settings**: `api/generate-voice.js` — stability (0.6), similarity_boost (0.85), style (0.3), speaker_boost (true). Model: `eleven_multilingual_v2`.
+- **Demo story text**: Hardcoded in `api/generate-demo.js` function `generateStoryText()`. Generates "Хранитель Снов" demo with child's name and gender-correct pronouns.
+- **Voice clone stories**: Hardcoded in `api/generate-voice.js` as `STORIES` object (keys: `dragon`, `moon`).
+- **Face-swap template**: A pre-generated cartoon scene image hosted at `TEMPLATE_SCENE_URL`. Used as the base for face-swap; child's photo face is swapped onto the cartoon character.
 - **Email integrations**: Uncomment desired option in `api/collect-email.js` (Google Sheets webhook, Telegram bot, or custom).
 
-## Environment Variables (Backend)
+## Environment Variables
 
-- `ELEVENLABS_API_KEY` — Required. Needs Creator plan ($22/mo) for voice cloning access.
+- `ELEVENLABS_API_KEY` — Required. ElevenLabs API key.
+- `ELEVENLABS_VOICE_ID` — Required for demo. Pre-made narrator voice ID (not a clone).
+- `AKOOL_API_KEY` — Optional. Akool face-swap API. Falls back to template image if not set.
+- `AKOOL_CLIENT_ID` — Optional. Akool client ID for auth.
+- `TEMPLATE_SCENE_URL` — URL of the cartoon template scene for face-swap.
 - `GOOGLE_SHEETS_WEBHOOK` — Optional. Apps Script webhook URL.
 - `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` — Optional. For signup notifications.
 
 ## Tech Stack
 
-- Frontend: Vanilla HTML/CSS/JS, Google Fonts (Nunito + Comfortaa)
-- Backend: Node.js serverless on Vercel, `formidable` for multipart parsing
-- External API: ElevenLabs v1 (voice cloning + TTS)
+- Frontend: Vanilla HTML/CSS/JS (all inline in index.html), Google Fonts (Nunito)
+- Backend: Node.js serverless on Vercel, `formidable` for multipart parsing (generate-voice only)
+- External APIs: ElevenLabs v1 (TTS), Akool (face-swap)
 
 ## Design System
 
-Fonts: Comfortaa (headings), Nunito (body). Color palette uses CSS custom properties: lavender/purple primary gradient, cream backgrounds (#FFFBF0), with honey/mint/rose/sky accents. Mobile breakpoint at 768px.
+Font: Nunito (weights 400-900). CTA buttons use coral gradient (`linear-gradient(135deg, #FF6B6B, #FF8E53)`), never purple. Body background: `#FFF8F0` (cream). Footer: dark `#1A1040`. SVG waves between sections. Mobile breakpoint at 768px.
+
+Color variables: `--bg-cream`, `--bg-lavender`, `--bg-mint`, `--bg-night`, `--coral`, `--orange`, `--purple`, `--purple-soft`, `--gold`. Card accents: `--card-sleep`, `--card-garden`, `--card-emotions`, `--card-friends`, `--card-fears`.
