@@ -198,11 +198,13 @@
     btn.addEventListener('click', function() { goToStep(currentStep - 1); });
   });
 
-  // "Create story" buttons in catalog cards
-  document.querySelectorAll('[data-order-theme]').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
+  // Clicking catalog cards or price → select theme and scroll to form
+  document.querySelectorAll('.story-card').forEach(function(card) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
       e.preventDefault();
-      var theme = this.getAttribute('data-order-theme');
+      var theme = this.getAttribute('data-theme');
+      if (!theme) return;
       formData.theme = theme;
 
       // Select corresponding theme in form

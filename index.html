@@ -6,28 +6,23 @@
   <title>СказкиПро — Терапевтические сказки-мультики для вашего ребёнка</title>
   <meta name="description" content="Персональная сказка-мультик, где ваш ребёнок — главный герой. Помогает с засыпанием, адаптацией к садику, страхами. Создайте за 3 шага.">
 
-  <!-- OG Tags -->
   <meta property="og:title" content="СказкиПро — Сказка решит то, что не могут уговоры">
   <meta property="og:description" content="Терапевтическая сказка-мультик с вашим ребёнком в главной роли. Помогает с засыпанием, страхами, адаптацией к садику.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.skazkipro.pro/">
   <meta property="og:locale" content="ru_RU">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "СказкиПро — Терапевтические сказки-мультики",
-    "description": "Персональная сказка-мультик, где ваш ребёнок — главный герой. Помогает с засыпанием, адаптацией к садику, управлением эмоциями.",
+    "description": "Персональная сказка-мультик, где ваш ребёнок — главный герой.",
     "brand": { "@type": "Brand", "name": "СказкиПро" },
     "offers": {
       "@type": "Offer",
@@ -43,21 +38,17 @@
   <!-- ═══════════ HEADER ═══════════ -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="#" class="logo">
-        <span class="logo__icon">📖</span>
-        СказкиПро
-      </a>
+      <a href="#" class="logo">СказкиПро</a>
       <nav class="nav" aria-label="Основная навигация">
         <a href="#catalog">Каталог сказок</a>
         <a href="#how">Как это работает</a>
         <a href="#faq">Вопросы</a>
       </nav>
-      <a href="#order" class="btn btn--header">Заказать сказку</a>
+      <a href="#order" class="btn btn--header">Заказать</a>
       <button class="burger" aria-label="Открыть меню" aria-expanded="false">☰</button>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <a href="#catalog">Каталог сказок</a>
     <a href="#how">Как это работает</a>
@@ -70,145 +61,177 @@
     <!-- ═══════════ HERO ═══════════ -->
     <section class="hero" id="hero">
       <div class="container hero__inner">
-        <div class="hero__content">
-          <h1 class="hero__title">
-            Ребёнок не засыпает сам?<br>
-            Боится садика? Не делится?
-          </h1>
-          <p class="hero__subtitle">
-            Терапевтическая сказка&#8209;мультик, где ваш ребёнок&nbsp;— главный герой, решает это мягче и быстрее, чем уговоры.
-          </p>
-          <div class="hero__badge">
-            🧠 Метод сказкотерапии + ИИ&#8209;персонализация
-          </div>
-          <a href="#catalog" class="btn btn--primary btn--lg">
-            Выбрать сказку для моего ребёнка →
-          </a>
-        </div>
+
+        <!-- Hero illustration circle -->
         <div class="hero__visual" aria-hidden="true">
-          <!-- Заменить на: короткое видео-превью сказки (10-15 сек loop, autoplay, muted) -->
           <div class="hero__visual-placeholder">
-            <span class="emoji">🎬✨</span>
-            <p>Здесь будет превью<br>сказки-мультика</p>
+            <!-- Star SVG placeholder -->
+            <svg class="star" width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <path d="M40 8L48.5 28.5L70 32L54 48L58 70L40 60L22 70L26 48L10 32L31.5 28.5L40 8Z" fill="#FFD93D" stroke="#F5B800" stroke-width="2"/>
+            </svg>
+            <p>Тут будет иллюстрация<br>ребёнка в мультике</p>
           </div>
         </div>
+
+        <h1 class="hero__title">
+          Ребёнок не засыпает?<br>Боится садика?
+        </h1>
+        <p class="hero__subtitle">
+          Терапевтическая сказка&#8209;мультик, где <strong>ваш ребёнок</strong>&nbsp;— главный герой, решает это мягче, чем уговоры
+        </p>
+        <div class="hero__badge">Метод сказкотерапии + ИИ&#8209;персонализация</div>
+        <a href="#catalog" class="btn btn--primary">Выбрать сказку для ребёнка</a>
+        <p class="hero__price-hint">от 399 &#8381; &middot; готово за 24 часа</p>
+
       </div>
     </section>
 
-    <!-- ═══════════ BENEFITS BAR ═══════════ -->
+    <!-- Wave: cream → cream -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none" fill="var(--bg-cream)">
+        <path d="M0,48 C360,0 1080,0 1440,48 L1440,48 L0,48 Z"/>
+      </svg>
+    </div>
+
+    <!-- ═══════════ BENEFITS ═══════════ -->
     <section class="benefits reveal">
       <div class="container benefits__inner">
+
         <div class="benefit">
-          <span class="benefit__icon" aria-hidden="true">🎬</span>
-          <strong>Ваш ребёнок — герой мультика</strong>
-          <span>ИИ создаёт персонажа по фото</span>
+          <div class="benefit__icon-wrap" style="background: #E8DEFF;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7C5CFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/>
+            </svg>
+          </div>
+          <div class="benefit__text">
+            <strong>Ваш ребёнок — герой мультика</strong>
+            <span>ИИ создаёт персонажа по фото</span>
+          </div>
         </div>
+
         <div class="benefit">
-          <span class="benefit__icon" aria-hidden="true">🧠</span>
-          <strong>Основано на сказкотерапии</strong>
-          <span>Каждый сюжет проработан с учётом детской психологии</span>
+          <div class="benefit__icon-wrap" style="background: #FFE8D6;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF9A76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            </svg>
+          </div>
+          <div class="benefit__text">
+            <strong>Сказкотерапия</strong>
+            <span>Работает научно</span>
+          </div>
         </div>
+
         <div class="benefit">
-          <span class="benefit__icon" aria-hidden="true">⚡</span>
-          <strong>Готово за 24 часа</strong>
-          <span>Загрузите фото — получите персональное видео</span>
+          <div class="benefit__icon-wrap" style="background: #FFF3D6;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div class="benefit__text">
+            <strong>24 часа</strong>
+            <span>и сказка готова</span>
+          </div>
         </div>
+
       </div>
     </section>
+
+    <!-- Wave: cream → lavender -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none" fill="var(--bg-lavender)">
+        <path d="M0,0 C480,48 960,48 1440,0 L1440,48 L0,48 Z"/>
+      </svg>
+    </div>
 
     <!-- ═══════════ CATALOG ═══════════ -->
     <section class="catalog" id="catalog">
       <div class="container">
         <h2 class="section__title reveal">Выберите, с чем поможет сказка</h2>
-        <p class="section__subtitle reveal">Каждая сказка — это терапевтическая история, где ваш ребёнок проживает опыт и учится через свой мультик</p>
 
-        <div class="catalog__grid reveal-stagger">
+        <div class="catalog__list reveal-stagger">
 
-          <!-- Card 1: Sleep -->
+          <!-- Sleep -->
           <article class="story-card story-card--featured" data-theme="sleep">
-            <span class="story-card__badge">Самая популярная</span>
-            <div class="story-card__visual">
-              <span class="story-card__icon" aria-hidden="true">🌙</span>
+            <div class="story-card__icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7C5CFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
             </div>
             <div class="story-card__body">
-              <span class="story-card__age">2–5 лет</span>
               <h3 class="story-card__title">Засыпать в своей кроватке</h3>
-              <p class="story-card__desc">Ваш ребёнок боится спать один? Сказка покажет, как герой находит волшебного защитника снов и учится засыпать в своей кроватке с удовольствием.</p>
-              <div class="story-card__footer">
-                <span class="story-card__price">399₽</span>
-                <button class="btn btn--card" data-order-theme="sleep">Создать сказку</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 2: Kindergarten -->
-          <article class="story-card" data-theme="garden">
-            <span class="story-card__badge" style="background: var(--garden);">Сезонный хит</span>
-            <div class="story-card__visual">
-              <span class="story-card__icon" aria-hidden="true">🏫</span>
-            </div>
-            <div class="story-card__body">
-              <span class="story-card__age">2–4 года</span>
-              <h3 class="story-card__title">Первые дни в детском саду</h3>
-              <p class="story-card__desc">Скоро в садик? Сказка мягко покажет ребёнку, как весело и безопасно в детском саду — через его собственное приключение с новыми друзьями.</p>
-              <div class="story-card__footer">
-                <span class="story-card__price">399₽</span>
-                <button class="btn btn--card" data-order-theme="garden">Создать сказку</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 3: Emotions -->
-          <article class="story-card" data-theme="emotions">
-            <div class="story-card__visual">
-              <span class="story-card__icon" aria-hidden="true">💛</span>
-            </div>
-            <div class="story-card__body">
-              <span class="story-card__age">3–6 лет</span>
-              <h3 class="story-card__title">Справляться с большими эмоциями</h3>
-              <p class="story-card__desc">Истерики, злость, обида? Сказка учит ребёнка узнавать свои чувства, называть их и справляться — не подавлять, а проживать.</p>
-              <div class="story-card__footer">
-                <span class="story-card__price">399₽</span>
-                <button class="btn btn--card" data-order-theme="emotions">Создать сказку</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 4: Sharing -->
-          <article class="story-card" data-theme="friends">
-            <div class="story-card__visual">
-              <span class="story-card__icon" aria-hidden="true">🤝</span>
-            </div>
-            <div class="story-card__body">
               <span class="story-card__age">2–5 лет</span>
-              <h3 class="story-card__title">Делиться и дружить</h3>
-              <p class="story-card__desc">Не хочет делиться игрушками? Сказка покажет, что делиться — это не потерять, а приобрести друга. Через историю, где ваш ребёнок — главный герой.</p>
-              <div class="story-card__footer">
-                <span class="story-card__price">399₽</span>
-                <button class="btn btn--card" data-order-theme="friends">Создать сказку</button>
-              </div>
             </div>
+            <span class="story-card__price" data-order-theme="sleep">399 &#8381;</span>
           </article>
 
-          <!-- Card 5: Fears -->
-          <article class="story-card" data-theme="fears">
-            <div class="story-card__visual">
-              <span class="story-card__icon" aria-hidden="true">🔦</span>
+          <!-- Kindergarten -->
+          <article class="story-card" data-theme="garden">
+            <div class="story-card__icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FF9A76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
             </div>
             <div class="story-card__body">
-              <span class="story-card__age">3–7 лет</span>
-              <h3 class="story-card__title">Победить страх темноты</h3>
-              <p class="story-card__desc">Боится темноты? Монстров под кроватью? Сказка превращает темноту в волшебное приключение, где ваш ребёнок — самый смелый герой.</p>
-              <div class="story-card__footer">
-                <span class="story-card__price">399₽</span>
-                <button class="btn btn--card" data-order-theme="fears">Создать сказку</button>
-              </div>
+              <h3 class="story-card__title">Адаптация к садику</h3>
+              <span class="story-card__age">2–4 года</span>
             </div>
+            <span class="story-card__price" data-order-theme="garden">399 &#8381;</span>
+          </article>
+
+          <!-- Emotions -->
+          <article class="story-card" data-theme="emotions">
+            <div class="story-card__icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Справляться с эмоциями</h3>
+              <span class="story-card__age">3–6 лет</span>
+            </div>
+            <span class="story-card__price" data-order-theme="emotions">399 &#8381;</span>
+          </article>
+
+          <!-- Friends -->
+          <article class="story-card" data-theme="friends">
+            <div class="story-card__icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5CB85C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Делиться и дружить</h3>
+              <span class="story-card__age">2–5 лет</span>
+            </div>
+            <span class="story-card__price" data-order-theme="friends">399 &#8381;</span>
+          </article>
+
+          <!-- Fears -->
+          <article class="story-card" data-theme="fears">
+            <div class="story-card__icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#4D96FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Победить страх темноты</h3>
+              <span class="story-card__age">3–7 лет</span>
+            </div>
+            <span class="story-card__price" data-order-theme="fears">399 &#8381;</span>
           </article>
 
         </div>
       </div>
     </section>
+
+    <!-- Wave: lavender → cream -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none" fill="var(--bg-cream)">
+        <path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z"/>
+      </svg>
+    </div>
 
     <!-- ═══════════ HOW IT WORKS ═══════════ -->
     <section class="how" id="how">
@@ -220,32 +243,31 @@
             <div class="step__number">1</div>
             <div class="step__content">
               <h3>Выберите проблему</h3>
-              <p>Что сейчас волнует вас как родителя? Засыпание, садик, страхи, эмоции?</p>
+              <p>Что волнует вас как родителя? Засыпание, садик, страхи?</p>
             </div>
           </div>
           <div class="step">
             <div class="step__number">2</div>
             <div class="step__content">
-              <h3>Загрузите фото ребёнка</h3>
-              <p>Одно фото лица — и ИИ создаст мультяшного персонажа, похожего на вашего малыша.</p>
+              <h3>Загрузите фото</h3>
+              <p>Одно фото лица — ИИ создаст мультяшного персонажа.</p>
             </div>
           </div>
           <div class="step">
             <div class="step__number">3</div>
             <div class="step__content">
-              <h3>Получите сказку-мультик</h3>
-              <p>Готовое персональное видео за 24 часа. Ребёнок смотрит, узнаёт себя — и учится.</p>
+              <h3>Получите мультик</h3>
+              <p>Персональное видео за 24 часа. Ребёнок узнает себя.</p>
             </div>
           </div>
         </div>
 
-        <!-- Coming soon: Voice -->
         <div class="coming-soon reveal">
           <div class="coming-soon__title">
-            🎙️ Скоро: озвучка голосом мамы или папы
+            Скоро: озвучка голосом мамы или папы
             <span class="coming-soon__badge">В разработке</span>
           </div>
-          <p>Запишите 2 минуты своего голоса — и все сказки зазвучат родным голосом. Даже когда вас нет рядом.</p>
+          <p>Запишите 2 минуты своего голоса — и все сказки зазвучат родным голосом.</p>
           <form class="coming-soon__form" id="voiceNotifyForm">
             <input type="text" placeholder="Телефон или email" aria-label="Контакт для уведомления">
             <button type="submit">Узнать первым</button>
@@ -254,28 +276,41 @@
       </div>
     </section>
 
+    <!-- Wave: cream → mint -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none" fill="var(--bg-mint)">
+        <path d="M0,0 C480,48 960,48 1440,0 L1440,48 L0,48 Z"/>
+      </svg>
+    </div>
+
     <!-- ═══════════ SOCIAL PROOF ═══════════ -->
     <section class="proof">
       <div class="container">
         <h2 class="section__title reveal">Почему терапевтические сказки работают</h2>
-        <p class="section__subtitle reveal">Научно обоснованный подход, который мы превращаем в персональный мультик</p>
 
         <div class="proof__grid reveal-stagger">
           <div class="proof-card">
-            <p class="proof-card__quote">«Терапевтические сказки — один из самых мягких и эффективных методов работы с детскими страхами и привычками. Ребёнок воспринимает решение проблемы не как указание, а как собственный опыт.»</p>
+            <p class="proof-card__quote">«Терапевтические сказки — один из самых мягких и эффективных методов работы с детскими страхами и привычками.»</p>
             <span class="proof-card__source">Методика сказкотерапии</span>
           </div>
           <div class="proof-card">
-            <p class="proof-card__quote">«Ребёнок гораздо лучше усваивает модель поведения, когда видит себя в роли героя истории. Идентификация с персонажем запускает механизм подражания — самый естественный для детского возраста.»</p>
+            <p class="proof-card__quote">«Ребёнок лучше усваивает модель поведения, когда видит себя в роли героя. Идентификация запускает подражание — самый естественный механизм.»</p>
             <span class="proof-card__source">Принцип идентификации в детской психологии</span>
           </div>
           <div class="proof-card">
-            <p class="proof-card__quote">«Визуальная персонализация усиливает эффект терапевтической сказки в разы. Когда ребёнок видит на экране себя — он не просто смотрит мультик, он проживает историю.»</p>
-            <span class="proof-card__source">Исследования в области детской нарративной терапии</span>
+            <p class="proof-card__quote">«Когда ребёнок видит на экране себя — он не просто смотрит мультик, он проживает историю. Это усиливает эффект в разы.»</p>
+            <span class="proof-card__source">Детская нарративная терапия</span>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Wave: mint → lavender -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none" fill="var(--bg-lavender)">
+        <path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z"/>
+      </svg>
+    </div>
 
     <!-- ═══════════ ORDER FORM ═══════════ -->
     <section class="order" id="order">
@@ -284,8 +319,7 @@
 
         <form class="order-form reveal" id="orderForm" novalidate>
 
-          <!-- Progress -->
-          <div class="form-progress" aria-label="Прогресс заполнения формы">
+          <div class="form-progress" aria-label="Прогресс">
             <div class="form-progress__step active">1</div>
             <div class="form-progress__line"></div>
             <div class="form-progress__step">2</div>
@@ -297,49 +331,65 @@
           <div class="form-step active" data-step="1">
             <h3 class="form-step__title">Выберите тему сказки</h3>
             <div class="theme-selector">
+
               <label class="theme-option">
                 <input type="radio" name="theme" value="sleep">
-                <span class="theme-option__icon">🌙</span>
+                <div class="theme-option__icon-wrap" style="background: var(--sleep-bg);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--sleep-icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </div>
                 <div class="theme-option__text">
                   <strong>Засыпать в своей кроватке</strong>
                   <span>2–5 лет</span>
                 </div>
               </label>
+
               <label class="theme-option">
                 <input type="radio" name="theme" value="garden">
-                <span class="theme-option__icon">🏫</span>
+                <div class="theme-option__icon-wrap" style="background: var(--garden-bg);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--garden-icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
                 <div class="theme-option__text">
-                  <strong>Первые дни в детском саду</strong>
+                  <strong>Адаптация к садику</strong>
                   <span>2–4 года</span>
                 </div>
               </label>
+
               <label class="theme-option">
                 <input type="radio" name="theme" value="emotions">
-                <span class="theme-option__icon">💛</span>
+                <div class="theme-option__icon-wrap" style="background: var(--emotions-bg);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--emotions-icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
                 <div class="theme-option__text">
-                  <strong>Справляться с большими эмоциями</strong>
+                  <strong>Справляться с эмоциями</strong>
                   <span>3–6 лет</span>
                 </div>
               </label>
+
               <label class="theme-option">
                 <input type="radio" name="theme" value="friends">
-                <span class="theme-option__icon">🤝</span>
+                <div class="theme-option__icon-wrap" style="background: var(--friends-bg);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--friends-icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
                 <div class="theme-option__text">
                   <strong>Делиться и дружить</strong>
                   <span>2–5 лет</span>
                 </div>
               </label>
+
               <label class="theme-option">
                 <input type="radio" name="theme" value="fears">
-                <span class="theme-option__icon">🔦</span>
+                <div class="theme-option__icon-wrap" style="background: var(--fears-bg);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--fears-icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
                 <div class="theme-option__text">
                   <strong>Победить страх темноты</strong>
                   <span>3–7 лет</span>
                 </div>
               </label>
+
             </div>
             <div class="form-actions">
-              <button type="button" class="btn btn--next" data-action="next" style="flex:1">Далее →</button>
+              <button type="button" class="btn btn--next" data-action="next" style="flex:1">Далее</button>
             </div>
           </div>
 
@@ -372,11 +422,11 @@
               <div class="gender-options">
                 <label class="gender-option">
                   <input type="radio" name="gender" value="boy">
-                  👦 Мальчик
+                  Мальчик
                 </label>
                 <label class="gender-option">
                   <input type="radio" name="gender" value="girl">
-                  👧 Девочка
+                  Девочка
                 </label>
               </div>
             </div>
@@ -385,9 +435,11 @@
               <label>Фото ребёнка</label>
               <div class="photo-upload">
                 <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" aria-label="Загрузить фото ребёнка">
-                <div class="photo-upload__icon">📷</div>
+                <div class="photo-upload__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
                 <p class="photo-upload__text"><strong>Нажмите</strong> или перетащите фото сюда</p>
-                <p class="photo-upload__hint">Чёткое фото лица, анфас, хорошее освещение. JPG, PNG или WebP до 10 МБ.</p>
+                <p class="photo-upload__hint">Чёткое фото лица, анфас. JPG, PNG или WebP до 10 МБ.</p>
                 <div class="photo-upload__preview">
                   <img src="" alt="Превью загруженного фото">
                   <p class="file-name"></p>
@@ -397,12 +449,12 @@
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn btn--back" data-action="back">← Назад</button>
-              <button type="button" class="btn btn--next" data-action="next">Далее →</button>
+              <button type="button" class="btn btn--back" data-action="back">Назад</button>
+              <button type="button" class="btn btn--next" data-action="next">Далее</button>
             </div>
           </div>
 
-          <!-- Step 3: Contact & Payment -->
+          <!-- Step 3: Contact -->
           <div class="form-step" data-step="3">
             <h3 class="form-step__title">Контакт и оплата</h3>
 
@@ -418,30 +470,29 @@
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn btn--back" data-action="back">← Назад</button>
-              <button type="button" class="btn btn--submit" id="submitBtn">Оплатить 399₽ и получить сказку</button>
+              <button type="button" class="btn btn--back" data-action="back">Назад</button>
+              <button type="button" class="btn btn--submit" id="submitBtn">Отправить заявку на 399&#8381;</button>
             </div>
 
             <p class="form-footer-note">Готовая сказка — в течение 24 часов в Telegram</p>
-
             <div class="payment-icons">
-              <span>💳 Карта</span>
-              <span>🏦 СБП</span>
+              <span>Карта</span>
+              <span>СБП</span>
             </div>
           </div>
 
         </form>
 
-        <!-- Thank You Screen -->
+        <!-- Thank You -->
         <div class="thank-you" id="thankYou">
-          <div class="thank-you__icon">✨</div>
+          <div class="thank-you__icon">&#10024;</div>
           <h3 class="thank-you__title">Спасибо! Сказка для <span class="child-name"></span> уже создаётся</h3>
           <p class="thank-you__subtitle">Мы получили ваш заказ и начинаем работу над персональным мультиком.</p>
           <div class="thank-you__steps">
             <h4>Что дальше:</h4>
             <ol>
               <li>В течение 24 часов мы пришлём готовое видео в Telegram</li>
-              <li>Покажите ребёнку — и наблюдайте за реакцией 😊</li>
+              <li>Покажите ребёнку — и наблюдайте за реакцией</li>
               <li>Если понравится — расскажите друзьям!</li>
             </ol>
           </div>
@@ -451,11 +502,17 @@
       </div>
     </section>
 
+    <!-- Wave: lavender → cream -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 48" preserveAspectRatio="none" fill="var(--bg-cream)">
+        <path d="M0,0 C480,48 960,48 1440,0 L1440,48 L0,48 Z"/>
+      </svg>
+    </div>
+
     <!-- ═══════════ FAQ ═══════════ -->
     <section class="faq" id="faq">
       <div class="container">
         <h2 class="section__title reveal">Частые вопросы</h2>
-
         <div class="faq__list reveal">
 
           <div class="faq-item">
@@ -464,7 +521,7 @@
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-item__answer" role="region">
-              <p>ИИ создаёт мультяшного персонажа на основе фото вашего ребёнка. Персонаж узнаваемо похож — те же черты лица, цвет волос, одежда. Ребёнок сразу узнает себя.</p>
+              <p>ИИ создаёт мультяшного персонажа на основе фото. Персонаж узнаваемо похож — те же черты лица, цвет волос, одежда. Ребёнок сразу узнает себя.</p>
             </div>
           </div>
 
@@ -474,17 +531,17 @@
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-item__answer" role="region">
-              <p>3–5 минут — оптимальная длительность для восприятия ребёнком 2–7 лет. Это полноценная история с началом, кульминацией и счастливым финалом.</p>
+              <p>3–5 минут — оптимальная длительность для восприятия ребёнком 2–7 лет. Полноценная история с началом, кульминацией и счастливым финалом.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-item__question" aria-expanded="false">
-              Это правда работает? Сказки помогают с поведением?
+              Это правда работает? Сказки помогают?
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-item__answer" role="region">
-              <p>Терапевтические сказки (сказкотерапия) — научно обоснованный метод, который используется детскими психологами по всему миру. Когда ребёнок видит себя в роли героя, он не просто слушает — он проживает опыт. Это работает значительно лучше прямых указаний и уговоров.</p>
+              <p>Сказкотерапия — научно обоснованный метод, который используется детскими психологами по всему миру. Когда ребёнок видит себя героем, он проживает опыт. Это работает лучше прямых указаний.</p>
             </div>
           </div>
 
@@ -494,17 +551,17 @@
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-item__answer" role="region">
-              <p>В течение 24 часов после оплаты. Мы пришлём готовое видео в Telegram или на email.</p>
+              <p>В течение 24 часов после оплаты. Готовое видео придёт в Telegram или на email.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-item__question" aria-expanded="false">
-              Могу ли я заказать сказку на свою тему?
+              Могу заказать сказку на свою тему?
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-item__answer" role="region">
-              <p>Пока мы предлагаем 5 готовых терапевтических тем. Каждая из них разработана с учётом детской психологии. Скоро добавим возможность создавать сказки на любую тему.</p>
+              <p>Пока 5 готовых терапевтических тем. Каждая разработана с учётом детской психологии. Скоро добавим возможность создавать сказки на любую тему.</p>
             </div>
           </div>
 
@@ -514,7 +571,7 @@
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-item__answer" role="region">
-              <p>Мы работаем над этой функцией! Скоро вы сможете записать 2 минуты своего голоса — и вся сказка будет звучать голосом мамы или папы. Оставьте контакт в разделе «Скоро: озвучка голосом» — мы сообщим первым.</p>
+              <p>Мы работаем над этим! Скоро вы сможете записать 2 минуты голоса — и сказка зазвучит голосом мамы или папы. Оставьте контакт выше — сообщим первым.</p>
             </div>
           </div>
 
@@ -524,19 +581,17 @@
 
   </main>
 
-  <!-- ═══════════ FOOTER ═══════════ -->
   <footer class="footer">
     <div class="container footer__inner">
       <span class="footer__copy">© 2026 СказкиПро</span>
       <div class="footer__links">
         <a href="https://t.me/skazkipro" target="_blank" rel="noopener">Telegram</a>
         <a href="mailto:hello@skazkipro.pro">Написать нам</a>
-        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="privacy.html">Конфиденциальность</a>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="js/main.js"></script>
 </body>
 </html>
